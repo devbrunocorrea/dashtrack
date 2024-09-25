@@ -27,6 +27,9 @@ jobs:
       - name: Copy .env.example to .env
         run: cp .env.example .env
 
+      - name: Touch database.sqlite
+        run: touch database/database.sqlite
+
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
