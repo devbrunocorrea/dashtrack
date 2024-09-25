@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'tinyerp' => [
+        'endpoint' => env('TINYERP_ENDPOINT'),
+        'token' => env('TINYERP_TOKEN'),
+    ]
+
 ];
