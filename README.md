@@ -1,4 +1,7 @@
 # DashTrack
+
+![Laravel Tests](https://github.com/devbrunocorrea/dashtrack/actions/workflows/laravel-tests.yml/badge.svg)
+
 O sistema permite a visualização de indicadores com dados do TinyERP.
 
 ## Tecnologias:
