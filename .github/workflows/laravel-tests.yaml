@@ -30,10 +30,16 @@ jobs:
       - name: Setting sqlite
         run: |
           echo "DB_CONNECTION=sqlite" >> .env
-          echo "DB_DATABASE=/home/runner/work/${{ github.repository }}/database/database.sqlite" >> .env
+          echo "DB_DATABASE=$(pwd)/database/database.sqlite" >> .env
 
-      - name: Touch database.sqlite
-        run: touch database/database.sqlite
+      - name: Create SQLite database file
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+          chmod -R 777 database
+
+      - name: Verify SQLite file
+        run: ls -l database/database.sqlite
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
