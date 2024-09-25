@@ -27,6 +27,11 @@ jobs:
       - name: Copy .env.example to .env
         run: cp .env.example .env
 
+      - name: Setting sqlite
+        run: |
+          echo "DB_CONNECTION=sqlite" >> .env
+          echo "DB_DATABASE=/home/runner/work/${{ github.repository }}/database/database.sqlite" >> .env
+
       - name: Touch database.sqlite
         run: touch database/database.sqlite
 
@@ -37,7 +42,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Migrate
-        run: php artisan migrate
+        run: php artisan migrate --force
 
       - name: Run tests
         run: php artisan test
