@@ -15,10 +15,28 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- AdminLTE -->
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+        <!-- Navbar -->
+        @include('layouts.navbar-home')
+
+        <!-- Main Content -->
+        <div class="container mt-5">
+            @yield('content')
+            {{ $slot ?? '' }}
         </div>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">&copy; 2024 Commit Software</span>
+        </div>
+        </footer>
     </body>
 </html>
