@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "DashTrack API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/info": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "operationId": "e9bf7e0c297e7866a0ee0e5d70c6cb34",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "metric"
+                ],
+                "operationId": "608d4bf991d85dbb578a5438741b2bac",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/items": {
+            "get": {
+                "tags": [
+                    "metric"
+                ],
+                "operationId": "c909a00e5f856009072fb28ab2e35a90",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/invoices": {
+            "get": {
+                "tags": [
+                    "metric"
+                ],
+                "operationId": "c5a2275075ef76d7dc105c9bad6f462a",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/sellers": {
+            "get": {
+                "tags": [
+                    "metric"
+                ],
+                "operationId": "b227e2a94d4cca9ddb192d6e4045de6e",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "api",
+            "description": "api"
+        },
+        {
+            "name": "metric",
+            "description": "metric"
+        }
+    ]
+}
