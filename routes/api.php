@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/info', [MetricController::class, 'getInfo'])->name('api.info');
 Route::get('/orders', [MetricController::class, 'getOrders'])->name('api.orders');
+Route::get('/items', [MetricController::class, 'getItems'])->name('api.items');
 Route::get('/sellers', [MetricController::class, 'getSellers'])->name('api.sellers');
 Route::get('/products', [MetricController::class, 'getProducts'])->name('api.products');
 Route::get('/invoices', [MetricController::class, 'getInvoices'])->name('api.invoices');
