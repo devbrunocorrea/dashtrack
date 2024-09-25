@@ -24,11 +24,11 @@ jobs:
           ini-values: post_max_size=256M, upload_max_filesize=256M, memory_limit=512M
           coverage: none
 
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
       - name: Copy .env.example to .env
         run: cp .env.example .env
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Generate application key
         run: php artisan key:generate
