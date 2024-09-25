@@ -1,5 +1,5 @@
 # DashTrack
-O sistema permite a visualização de indicadores com de dados do TinyERP.
+O sistema permite a visualização de indicadores com dados do TinyERP.
 
 ## Tecnologias:
 - [x] PHP
@@ -18,6 +18,11 @@ TINYERP_TOKEN=TOKEN
 ## Execução via Docker:
 ```
 docker-compose up
+```
+
+## Testes:
+```
+php artisan test
 ```
 
 ## Acesso:
