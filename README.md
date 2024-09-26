@@ -11,6 +11,9 @@ O sistema permite a visualização de indicadores com dados do TinyERP.
 - [x] OpenAPI (L5-Swagger)
 - [x] AdminLTE
 - [x] Integração com TinyERP 
+- [x] Docker (sem Laravel/Sail)
+- [x] PHPMyAdmin 
+- [x] Nginx
 
 ## Configuração:
 ```
@@ -40,6 +43,7 @@ http://127.0.0.1:8123/api/documentation
 ### Principais rotas:
 - /api
 - /api/documentation
+- /register
 - /login
 - /logout
 - /dashboard
