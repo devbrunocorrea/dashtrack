@@ -32,13 +32,18 @@ php artisan test
 ```
 
 ## Acesso:
-http://127.0.0.1:8123
+http://127.0.0.1:8080
 
 ## API
-http://127.0.0.1:8123/api
+http://127.0.0.1:8080/api
 
 ## Documentação da API - OpenAPI (Swagger)
-http://127.0.0.1:8123/api/documentation
+http://127.0.0.1:8080/api/documentation
+
+## PHPMyAdmin:
+http://127.0.0.1:8081
+* Login: `root`
+* Senha: `root`
 
 ### Principais rotas:
 - /api
