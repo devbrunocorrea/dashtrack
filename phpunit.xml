@@ -18,6 +18,8 @@
         </include>
     </coverage>
     <php>
+        <env name="TINYERP_ENDPOINT" value="http://foobar"/>
+        <env name="TINYERP_TOKEN" value="token-token"/>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
