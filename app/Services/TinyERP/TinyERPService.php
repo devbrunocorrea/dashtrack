@@ -4,6 +4,7 @@ namespace App\Services\TinyERP;
 
 use App\Services\MetricServiceInterface;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Psr7\Response;
 
 class TinyERPService implements MetricServiceInterface
 {
@@ -26,23 +27,49 @@ class TinyERPService implements MetricServiceInterface
         return $this->token;
     }
 
-    private function get(string $resource)
+    private function generateURL(string $resource): string
     {
-        $endpoint = sprintf('%s/%s', $this->getEndpoint(), $resource);
-        $response = Http::get($endpoint, [
-            'token' => $this->getToken(),
-        ]);
-
-
-        $xml = simplexml_load_string($response->getBody());
-        $json = json_encode($xml);
-
-        return json_decode($json, true);
+        return sprintf('%s/%s', $this->getEndpoint(), $resource);
     }
 
-    private function getEntidadePesquisa(string $entidade): array
+    private function stringXMLToArray(?string $stringXML): array
     {
-        return $this->get(sprintf('%s.pesquisa.php', $entidade));
+        if (empty($stringXML)) {
+            return [];
+        }
+
+        $xml = simplexml_load_string($stringXML);
+        return json_decode(json_encode($xml), true);
+    }
+
+    private function requestGet($endpoint): Response
+    {
+        return Http::get($endpoint, [
+            'token' => $this->getToken(),
+        ]);
+    }
+
+    private function get(string $resource)
+    {
+        $endpoint = $this->generateURL($resource);
+
+        $response = $this->requestGet($endpoint);
+
+        $stringXML = $response->getBody();
+
+        return $this->stringXMLToArray($stringXML);
+    }
+
+    private function generateSearchResourceByEntity(string $entity)
+    {
+        return sprintf('%s.pesquisa.php', $entity);
+    }
+
+    private function searchByEntity(string $entity): array
+    {
+        $searchResource = $this->generateSearchResourceByEntity($entity);
+
+        return $this->get($searchResource);
     }
 
     public function getInfo(): array
@@ -52,37 +79,37 @@ class TinyERPService implements MetricServiceInterface
 
     public function getItems(): array
     {
-        return $this->getEntidadePesquisa('produtos');
+        return $this->searchByEntity('produtos');
     }
 
     public function getOrders(): array
     {
-        return $this->getEntidadePesquisa('pedidos');
+        return $this->searchByEntity('pedidos');
     }
 
     public function getSellers(): array
     {
-        return $this->getEntidadePesquisa('vendedores');
+        return $this->searchByEntity('vendedores');
     }
 
     public function getInvoices(): array
     {
-        return $this->getEntidadePesquisa('notas.fiscais');
+        return $this->searchByEntity('notas.fiscais');
     }
 
     public function getTags(): array
     {
-        return $this->getEntidadePesquisa('tag');
+        return $this->searchByEntity('tag');
     }
 
     public function getPriceList(): array
     {
-        return $this->getEntidadePesquisa('listas.precos');
+        return $this->searchByEntity('listas.precos');
     }
 
     public function getContacts(): array
     {
-        return $this->getEntidadePesquisa('contatos');
+        return $this->searchByEntity('contatos');
     }
     
 }
