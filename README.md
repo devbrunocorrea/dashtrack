@@ -21,9 +21,9 @@ TINYERP_ENDPOINT=https://api.tiny.com.br/api2
 TINYERP_TOKEN=TOKEN
 ```
 
-## Execução via Docker:
+## Execução:
 ```
-docker-compose up
+./start
 ```
 
 ## Testes:

@@ -1,0 +1,2 @@
+docker-compose up -dV --build
+docker-compose exec php php artisan migrate:refresh
