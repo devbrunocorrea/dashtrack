@@ -20,12 +20,6 @@
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/chart.js/Chart.min.css') }}">
-
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-        <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-        <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-
     </head>
     <body>
         <!-- Navbar -->
@@ -49,6 +43,10 @@
             All rights reserved.
         </footer>
 
+        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+        <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
         @yield('scripts')
+    </body>
 </div>
 </html>
