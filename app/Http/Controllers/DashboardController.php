@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $orders = $this->getMetricService()->getOrders();
-        $totalOrders = \count($orders["pedidos"]["pedido"]);
+        $totalOrders = \count($orders["pedidos"]);
 
         return view('dashboard', [
             'totalOrders' => $totalOrders,
