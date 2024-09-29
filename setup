@@ -1,0 +1,4 @@
+docker-compose up -dV --build
+docker-compose exec php composer install
+docker-compose exec php php artisan migrate:fresh
+docker-compose exec -d php php artisan dashtrack:sync

@@ -21,7 +21,17 @@ TINYERP_ENDPOINT=https://api.tiny.com.br/api2
 TINYERP_TOKEN=TOKEN
 ```
 
-## Execução:
+## Execução Inicial:
+```
+./setup
+```
+
+## Para execução:
+```
+./stop
+```
+
+## Iniciar novamente:
 ```
 ./start
 ```
