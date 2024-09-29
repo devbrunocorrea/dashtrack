@@ -3,6 +3,12 @@
     <span class="brand-text font-weight-light">#{{ config('app.name', 'Laravel') }}</span>
   </a>
 
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="info">
+      <a href="#" class="d-block"><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}</a>
+    </div>
+  </div>
+
   <div class="sidebar">
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
