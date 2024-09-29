@@ -4,7 +4,7 @@ namespace App\Services\TinyERP;
 
 use App\Services\MetricServiceInterface;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Client\Response;
 
 class TinyERPService implements MetricServiceInterface
 {
@@ -32,32 +32,27 @@ class TinyERPService implements MetricServiceInterface
         return sprintf('%s/%s', $this->getEndpoint(), $resource);
     }
 
-    private function stringXMLToArray(?string $stringXML): array
+    private function requestGet($endpoint, array $params = []): Response
     {
-        if (empty($stringXML)) {
-            return [];
-        }
+        $params['token'] = $this->getToken();
+        $params['formato'] = 'json';
 
-        $xml = simplexml_load_string($stringXML);
-        return json_decode(json_encode($xml), true);
+        return Http::get($endpoint, $params);
     }
 
-    private function requestGet($endpoint): Response
-    {
-        return Http::get($endpoint, [
-            'token' => $this->getToken(),
-        ]);
-    }
-
-    private function get(string $resource)
+    private function get(string $resource, array $params = []): array
     {
         $endpoint = $this->generateURL($resource);
 
-        $response = $this->requestGet($endpoint);
+        $response = $this->requestGet($endpoint, $params);
 
-        $stringXML = $response->getBody();
+        $array = json_decode($response->getBody(), true);
 
-        return $this->stringXMLToArray($stringXML);
+        if (!isset($array['retorno'])) {
+            throw new \Exception('Falha ao obter retorno');
+        }
+
+        return $array['retorno'];
     }
 
     private function generateSearchResourceByEntity(string $entity)
@@ -85,6 +80,25 @@ class TinyERPService implements MetricServiceInterface
     public function getOrders(): array
     {
         return $this->searchByEntity('pedidos');
+    }
+
+    public function getAllOrders(): \Generator
+    {
+        $resource = $this->generateSearchResourceByEntity('pedidos');
+        $page = 1;
+        $totalPages = 1;
+        while ($page <= $totalPages) {
+            if (isset($response)) {
+                $response['pagina'] = ++$page;
+                $totalPages = $response['numero_paginas'];
+            }
+
+            $response = $this->get($resource, ['pagina' => $page]);
+
+            foreach ($response['pedidos'] as $order) {
+                yield $order['pedido'];
+            }
+        }
     }
 
     public function getSellers(): array
