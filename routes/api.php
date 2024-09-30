@@ -19,9 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/info', [MetricController::class, 'getInfo'])->name('api.info');
-Route::get('/orders', [MetricController::class, 'getOrders'])->name('api.orders');
-Route::get('/items', [MetricController::class, 'getItems'])->name('api.items');
-Route::get('/sellers', [MetricController::class, 'getSellers'])->name('api.sellers');
-Route::get('/products', [MetricController::class, 'getProducts'])->name('api.products');
-Route::get('/invoices', [MetricController::class, 'getInvoices'])->name('api.invoices');
+// Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/info', [MetricController::class, 'getInfo'])->middleware(['auth'])->name('api.info');
+    Route::get('/orders', [MetricController::class, 'getOrders'])->middleware(['auth'])->name('api.orders');
+    Route::get('/products', [MetricController::class, 'getProducts'])->middleware(['auth'])->name('api.items');
+    Route::get('/sellers', [MetricController::class, 'getSellers'])->middleware(['auth'])->name('api.sellers');
+    Route::get('/products', [MetricController::class, 'getProducts'])->middleware(['auth'])->name('api.products');
+    Route::get('/invoices', [MetricController::class, 'getInvoices'])->middleware(['auth'])->name('api.invoices');
+// });
