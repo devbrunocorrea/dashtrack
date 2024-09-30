@@ -2,160 +2,32 @@
 
 @section('title', 'Dashboard')
 
-@section('content')<div class="card card-secondary">
-<div class="card-header">
-<h3 class="card-title">Custom Elements</h3>
-</div>
-
-<div class="card-body">
-<form>
-<div class="row">
-<div class="col-sm-6">
-
-<div class="form-group">
-<div class="custom-control custom-checkbox">
-<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-<label for="customCheckbox1" class="custom-control-label">Custom Checkbox</label>
-</div>
-<div class="custom-control custom-checkbox">
-<input class="custom-control-input" type="checkbox" id="customCheckbox2" checked="">
-<label for="customCheckbox2" class="custom-control-label">Custom Checkbox checked</label>
-</div>
-<div class="custom-control custom-checkbox">
-<input class="custom-control-input" type="checkbox" id="customCheckbox3" disabled="">
-<label for="customCheckbox3" class="custom-control-label">Custom Checkbox disabled</label>
-</div>
-<div class="custom-control custom-checkbox">
-<input class="custom-control-input custom-control-input-danger" type="checkbox" id="customCheckbox4" checked="">
-<label for="customCheckbox4" class="custom-control-label">Custom Checkbox with custom color</label>
-</div>
-<div class="custom-control custom-checkbox">
-<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" id="customCheckbox5" checked="">
-<label for="customCheckbox5" class="custom-control-label">Custom Checkbox with custom color outline</label>
-</div>
-</div>
-</div>
-<div class="col-sm-6">
-
-<div class="form-group">
-<div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="customRadio1" name="customRadio">
-<label for="customRadio1" class="custom-control-label">Custom Radio</label>
-</div>
-<div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="customRadio2" name="customRadio" checked="">
-<label for="customRadio2" class="custom-control-label">Custom Radio checked</label>
-</div>
-<div class="custom-control custom-radio">
-<input class="custom-control-input" type="radio" id="customRadio3" disabled="">
-<label for="customRadio3" class="custom-control-label">Custom Radio disabled</label>
-</div>
-<div class="custom-control custom-radio">
-<input class="custom-control-input custom-control-input-danger" type="radio" id="customRadio4" name="customRadio2" checked="">
-<label for="customRadio4" class="custom-control-label">Custom Radio with custom color</label>
-</div>
-<div class="custom-control custom-radio">
-<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="radio" id="customRadio5" name="customRadio2">
-<label for="customRadio5" class="custom-control-label">Custom Radio with custom color outline</label>
-</div>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-6">
-
-<div class="form-group">
-<label>Custom Select</label>
-<select class="custom-select">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
-<option>option 5</option>
-</select>
-</div>
-</div>
-<div class="col-sm-6">
-<div class="form-group">
-<label>Custom Select Disabled</label>
-<select class="custom-select" disabled="">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
-<option>option 5</option>
-</select>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-6">
-
-<div class="form-group">
-<label>Custom Select Multiple</label>
-<select multiple="" class="custom-select">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
-<option>option 5</option>
-</select>
-</div>
-</div>
-<div class="col-sm-6">
-<div class="form-group">
-<label>Custom Select Multiple Disabled</label>
-<select multiple="" class="custom-select" disabled="">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
-<option>option 5</option>
-</select>
-</div>
-</div>
-</div>
-<div class="form-group">
-<div class="custom-control custom-switch">
-<input type="checkbox" class="custom-control-input" id="customSwitch1">
-<label class="custom-control-label" for="customSwitch1">Toggle this custom switch element</label>
-</div>
-</div>
-<div class="form-group">
-<div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-<input type="checkbox" class="custom-control-input" id="customSwitch3">
-<label class="custom-control-label" for="customSwitch3">Toggle this custom switch element with custom colors danger/success</label>
-</div>
-</div>
-<div class="form-group">
-<div class="custom-control custom-switch">
-<input type="checkbox" class="custom-control-input" disabled="" id="customSwitch2">
-<label class="custom-control-label" for="customSwitch2">Disabled custom switch element</label>
-</div>
-</div>
-<div class="form-group">
-<label for="customRange1">Custom range</label>
-<input type="range" class="custom-range" id="customRange1">
-</div>
-<div class="form-group">
-<label for="customRange2">Custom range (custom-range-danger)</label>
-<input type="range" class="custom-range custom-range-danger" id="customRange2">
-</div>
-<div class="form-group">
-<label for="customRange3">Custom range (custom-range-teal)</label>
-<input type="range" class="custom-range custom-range-teal" id="customRange3">
-</div>
-<div class="form-group">
-
-<div class="custom-file">
-<input type="file" class="custom-file-input" id="customFile">
-<label class="custom-file-label" for="customFile">Choose file</label>
-</div>
-</div>
-<div class="form-group">
-</div>
-</form>
-</div>
-
+@section('content')
+<div class="container">
+    <div class="card card-secondary">
+        <div class="card-header">
+            <h3 class="card-title">Escolher Indicadores</h3>
+        </div>
+        <div class="card-body">
+            @TODO
+            <form action="#" method="POST">
+                @csrf
+                <div class="row">
+                    @foreach ([] as $indicator)
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="indicator{{ $indicator->id }}" name="indicators[]" value="{{ $indicator->id }}"
+                                    @if(auth()->user()->indicators->contains($indicator)) checked @endif>
+                                    <label for="indicator{{ $indicator->id }}" class="custom-control-label">{{ $indicator->name }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <button type="button" class="btn btn-primary">Salvar Indicadores</button>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection

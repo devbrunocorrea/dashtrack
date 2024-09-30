@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="#" class="brand-link">
-    <span class="brand-text font-weight-light">#{{ config('app.name', 'Laravel') }}</span>
+    <span class="brand-text font-weight-light"># {{ config('app.name', 'Laravel') }}</span>
   </a>
 
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
