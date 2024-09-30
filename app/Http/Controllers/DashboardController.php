@@ -4,21 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\MetricServiceTrait;
+use App\Services\MetricServiceInterface;
+use App\Repositories\MetricRepositoryInterface;
 
 class DashboardController extends Controller
 {
     use MetricServiceTrait;
+    
+    protected MetricRepositoryInterface $metricRepository;
+
+    public function __construct(MetricServiceInterface $metricService, MetricRepositoryInterface $metricRepository)
+    {
+        $this->metricService = $metricService;
+        $this->metricRepository = $metricRepository;
+    }
+
+    public function getRepository(): MetricRepositoryInterface
+    {
+        return $this->metricRepository;
+    }
 
     public function dashboard()
     {
-        $orders = $this->getMetricService()->getOrders();
-        $totalOrders = \count($orders["pedidos"]);
-
         return view('dashboard', [
-            'totalOrders' => $totalOrders,
-            'totalInvoices' => $totalOrders,
-            'totalItems' => $totalOrders,
-            'totalSellers' => $totalOrders,
+            'totalOrders' => $this->getRepository()->findTotalOrders(),
+            'totalOrdersCanceled' => $this->getRepository()->findTotalOrdersCanceled(),
+            'totalOrdersDelivered' => $this->getRepository()->findTotalOrdersDelivered(),
+            'totalOrdersDoneToDelivery' => $this->getRepository()->findTotalOrdersDoneToDelivery(),
+            'totalOrdersIncompleteData' => $this->getRepository()->findTotalOrdersIncompleteData(),
+
+            'sales' => $this->getRepository()->findSalesCurrentYear(),
         ]);
     }
 }

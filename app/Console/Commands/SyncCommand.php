@@ -21,10 +21,10 @@ class SyncCommand extends Command
 
     private function syncOrders()
     {
-        $this->info('TinyERP :: Pull de Pedidos');
+        $this->info('TinyERP :: Sync');
         $this->line('Processing...');
 
-        foreach($this->metricService->getAllOrders() as $orderResponse) {
+        foreach($this->metricService->getAllByEntity($this->metricService::ENTITY_ORDER) as $orderResponse) {
             $order = Order::updateOrCreate(
                 ['id' => $orderResponse['id']],
                 $orderResponse

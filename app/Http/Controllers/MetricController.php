@@ -48,10 +48,10 @@ class MetricController extends Controller
 
         return json_encode($service->getOrders());
     }
-
-     /**
+    
+    /**
      * @OA\Get(
-     *     path="/api/items",
+     *     path="/api/metrics",
      *     tags={"metric"},
      *     @OA\Response(
      *         response=200,
@@ -59,11 +59,30 @@ class MetricController extends Controller
      *     )
      * )
      */
-    public function getItems(): string
+    public function getMetricSummary()
+    {
+        return json_encode([
+            'tinyerp_total_orders' => $this->repository->getTotalOrders(),
+            'tinyerp_total_orders_canceled' => $this->repository->getTotalOrdersCanceled(),
+            'tinyerp_total_orders_delivered' => $this->repository->getTotalOrdersDelivered(),
+        ]);
+    }
+
+     /**
+     * @OA\Get(
+     *     path="/api/products",
+     *     tags={"metric"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation"
+     *     )
+     * )
+     */
+    public function getProducts(): string
     {
         $service = $this->getMetricService();
 
-        return json_encode($service->getItems());
+        return json_encode($service->getByEntity($this->getMetricService()::ENTITY_PRODUCT));
     }
 
      /**
@@ -80,7 +99,7 @@ class MetricController extends Controller
     {
         $service = $this->getMetricService();
 
-        return json_encode($service->getInvoices());
+        return json_encode($service->getByEntity($this->getMetricService()::ENTITY_INVOICE));
     }
 
      /**
@@ -97,6 +116,6 @@ class MetricController extends Controller
     {
         $service = $this->getMetricService();
 
-        return json_encode($service->getSellers());
+        return json_encode($service->getByEntity($this->getMetricService()::ENTITY_SELLER));
     }
 }

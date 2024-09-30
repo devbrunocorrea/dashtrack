@@ -11,6 +11,14 @@ class TinyERPService implements MetricServiceInterface
     private string $endpoint;
     private string $token;
 
+    public const ENTITY_ORDER = 'pedidos';
+    public const ENTITY_SELLER = 'vendedores';
+    public const ENTITY_INVOICE = 'notas.fiscais';
+    public const ENTITY_TAG = 'tag';
+    public const ENTITY_PRICE_LIST = 'listas.precos';
+    public const ENTITY_CONTACT = 'contatos';
+    public const ENTITY_PRODUCT = 'contatos';
+
     public function __construct()
     {
         $this->endpoint = config('services.tinyerp.endpoint');
@@ -32,7 +40,7 @@ class TinyERPService implements MetricServiceInterface
         return sprintf('%s/%s', $this->getEndpoint(), $resource);
     }
 
-    private function requestGet($endpoint, array $params = []): Response
+    private function requestGet($endpoint, array $params = [])
     {
         $params['token'] = $this->getToken();
         $params['formato'] = 'json';
@@ -72,19 +80,14 @@ class TinyERPService implements MetricServiceInterface
         return $this->get('info.php');
     }
 
-    public function getItems(): array
+    public function getByEntity(string $entity): array
     {
-        return $this->searchByEntity('produtos');
+        return $this->searchByEntity($entity);
     }
 
-    public function getOrders(): array
+    public function getAllByEntity(string $entity)
     {
-        return $this->searchByEntity('pedidos');
-    }
-
-    public function getAllOrders(): \Generator
-    {
-        $resource = $this->generateSearchResourceByEntity('pedidos');
+        $resource = $this->generateSearchResourceByEntity($entity);
         $page = 1;
         $totalPages = 1;
         while ($page <= $totalPages) {
@@ -95,35 +98,9 @@ class TinyERPService implements MetricServiceInterface
 
             $response = $this->get($resource, ['pagina' => $page]);
 
-            foreach ($response['pedidos'] as $order) {
-                yield $order['pedido'];
+            foreach ($response[$entity] as $responseEntity) {
+                yield current($responseEntity);
             }
         }
     }
-
-    public function getSellers(): array
-    {
-        return $this->searchByEntity('vendedores');
-    }
-
-    public function getInvoices(): array
-    {
-        return $this->searchByEntity('notas.fiscais');
-    }
-
-    public function getTags(): array
-    {
-        return $this->searchByEntity('tag');
-    }
-
-    public function getPriceList(): array
-    {
-        return $this->searchByEntity('listas.precos');
-    }
-
-    public function getContacts(): array
-    {
-        return $this->searchByEntity('contatos');
-    }
-    
 }
