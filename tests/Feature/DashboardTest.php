@@ -18,4 +18,16 @@ class DashboardTest extends TestCase
 
         $response->assertStatus(302);
     }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function test_dashboard_settings()
+    {
+        $response = $this->get('/dashboard');
+
+        $response->assertStatus(302);
+    }
 }

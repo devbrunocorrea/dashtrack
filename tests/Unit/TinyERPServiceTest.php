@@ -79,9 +79,9 @@ class TinyERPServiceTest extends TestCase
                 "numero_paginas": 1566,
                 "pedidos": {
                     "pedido": {
-                        "id": 919293603,
-                        "numero": 153120,
-                        "numero_ecommerce": "Lojas Americanas-423600324",
+                        "id": 999999999,
+                        "numero": 222222,
+                        "numero_ecommerce": "Lojas Americanas-333333333",
                         "data_pedido": "11/08/2022",
                         "data_prevista": "16/08/2022",
                         "nome": "Fulano da Silva",
@@ -126,9 +126,9 @@ class TinyERPServiceTest extends TestCase
                 "numero_paginas": 1566,
                 "pedidos": {
                     "pedido": {
-                        "id": "919293603",
-                        "numero": "153120",
-                        "numero_ecommerce": "Lojas Americanas-423600324",
+                        "id": "999999999",
+                        "numero": "222222",
+                        "numero_ecommerce": "Lojas Americanas-333333333",
                         "data_pedido": "11/08/2022",
                         "data_prevista": "16/08/2022",
                         "nome": "Fulano da Silva",
@@ -160,9 +160,9 @@ class TinyERPServiceTest extends TestCase
             "pedidos" => [
                 "pedido" =>
                 [
-                    "id" => "919293603",
-                    "numero" => "153120",
-                    "numero_ecommerce" => "Lojas Americanas-423600324",
+                    "id" => "999999999",
+                    "numero" => "222222",
+                    "numero_ecommerce" => "Lojas Americanas-333333333",
                     "data_pedido" => "11/08/2022",
                     "data_prevista" => "16/08/2022",
                     "nome" => "Fulano da Silva",
