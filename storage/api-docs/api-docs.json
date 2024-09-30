@@ -31,12 +31,25 @@
                 }
             }
         },
-        "/api/items": {
+        "/api/metrics": {
             "get": {
                 "tags": [
                     "metric"
                 ],
-                "operationId": "c909a00e5f856009072fb28ab2e35a90",
+                "operationId": "107bba80be8119e03958e674352e85cc",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "metric"
+                ],
+                "operationId": "d12d25f0f40ac74fad9003e2a6ccb5e2",
                 "responses": {
                     "200": {
                         "description": "successful operation"
