@@ -83,13 +83,14 @@ php artisan dashtrack:sync
 ```mermaid
 flowchart TD
     TinyERP ==>|GET| TinyERPService
-    MySQL[(MySQL)] -->|Repository|Controller
-    TinyERPService -->|MetricService| Console(dashtrack:sync)
-    TinyERPService -->|MetricService| Console2(dashtrack:check)
-    TinyERPService -->|MetricService| Controller
-    TinyERPService -->|MetricService & Repository| API
-    Console -->|persist|MySQL[(MySQL)]
-    Controller -->|/dashboard| Web
+    MySQL[(MySQL)] -.->Controller
+    MySQL[(MySQL)] -.->API
+    TinyERPService ==> Console(dashtrack:sync)
+    TinyERPService --> Console2(dashtrack:check)
+    TinyERPService --> Controller
+    TinyERPService --> API
+    Console ==>|persist|MySQL[(MySQL)]
+    Controller ==>|/dashboard| Web
     API -->|/api/| Web
     OpenAPI -->|/api/documentation|Web
 ```
