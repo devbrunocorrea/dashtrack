@@ -21,6 +21,13 @@
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+        <style>
+            body {
+                height: 100vh;
+                margin: 0;
+                background: linear-gradient(135deg, #c5d4ff, #ffffff);
+            }
+        </style>
     </head>
     <body>
         <!-- Navbar -->

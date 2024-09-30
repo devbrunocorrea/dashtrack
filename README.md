@@ -2,7 +2,7 @@
 
 [![Laravel Tests](https://github.com/devbrunocorrea/dashtrack/actions/workflows/laravel-tests.yaml/badge.svg?branch=main)](https://github.com/devbrunocorrea/dashtrack/actions/workflows/laravel-tests.yaml)
 
-O sistema permite a visualização de indicadores com dados importados do TinyERP.
+Micro-SaaS para Visualização de Indicadores de Negócios com Integração ao TinyERP
 <img src="resources/docs/app.png" />
 
 ## Tecnologias:
@@ -31,7 +31,7 @@ TINYERP_TOKEN=TOKEN
 ./setup
 ```
 
-## Para execução:
+## Parar execução:
 ```
 ./stop
 ```
