@@ -21,6 +21,7 @@ Micro-SaaS para Visualização de Indicadores de Negócios com Integração ao T
 - [x] docker-compose
 
 ## Configuração:
+É necessário inserir o token de autenticação na variável de ambiente `TINYERP_TOKEN`:
 ```
 TINYERP_ENDPOINT=https://api.tiny.com.br/api2
 TINYERP_TOKEN=TOKEN
@@ -75,4 +76,20 @@ http://127.0.0.1:8081
 ### Commands:
 ```bash
 php artisan dashtrack:check
+php artisan dashtrack:sync
+```
+
+## Estrutura:
+```mermaid
+flowchart TD
+    TinyERP ==>|GET| TinyERPService
+    MySQL[(MySQL)] -->|Repository|Controller
+    TinyERPService -->|MetricService| Console(dashtrack:sync)
+    TinyERPService -->|MetricService| Console2(dashtrack:check)
+    TinyERPService -->|MetricService| Controller
+    TinyERPService -->|MetricService & Repository| API
+    Console -->|persist|MySQL[(MySQL)]
+    Controller -->|/dashboard| Web
+    API -->|/api/| Web
+    OpenAPI -->|/api/documentation|Web
 ```
