@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('tinyerp_pedidos', function (Blueprint $table) {
             $table->id();
             $table->integer('numero');
-            $table->string('numero_ecommerce');
+            $table->string('numero_ecommerce')->nullable();
             $table->dateTime('data_pedido');
             $table->dateTime('data_prevista')->nullable();
             $table->string('nome');

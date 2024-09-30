@@ -43,7 +43,7 @@ class Order extends Model
     public function getDataPedidoAttribute($value)
     {
         if (empty($value)) {
-            return;
+            return null;
         }
         
         return Carbon::parse($value)->format('d/m/Y');
