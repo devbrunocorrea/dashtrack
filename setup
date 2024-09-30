@@ -1,4 +1,10 @@
 docker-compose up -dV --build
+clear
 docker-compose exec php composer install
-docker-compose exec php php artisan migrate:fresh
+clear
+echo Aguardando base de dados ser estabelecida...
+sleep 10 && docker-compose exec php php artisan migrate:fresh
+docker-compose exec php php artisan db:seed --class=IndicatorSeeder
 docker-compose exec -d php php artisan dashtrack:sync
+clear
+echo "\n\n\n\n\n \t\t\tAcesse:\n\n \t\t\thttp://localhost:8080 \n\n"

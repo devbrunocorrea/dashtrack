@@ -1,1 +1,3 @@
 docker-compose up -dV
+clear
+echo "\n\n\n\n\n \t\t\tAcesse:\n\n \t\t\thttp://localhost:8080 \n\n"
