@@ -12,6 +12,24 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        volumes:
+          - /var/lib/mysql
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,19 +45,19 @@ jobs:
       - name: Copy .env.example to .env
         run: cp .env.example .env
 
-      - name: Setting sqlite
+      - name: Update environment variables for MySQL
         run: |
-          echo "DB_CONNECTION=sqlite" >> .env
-          echo "DB_DATABASE=$(pwd)/database/database.sqlite" >> .env
+          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=mysql/' .env
+          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+          sed -i 's/DB_PORT=.*/DB_PORT=3306/' .env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=test_db/' .env
+          sed -i 's/DB_USERNAME=.*/DB_USERNAME=test_user/' .env
+          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=test_password/' .env
 
-      - name: Create SQLite database file
+      - name: Wait for MySQL to be ready
         run: |
-          mkdir -p database
-          touch database/database.sqlite
-          chmod -R 777 database
-
-      - name: Verify SQLite file
-        run: ls -l database/database.sqlite
+          sudo apt-get install -y mysql-client
+          until mysqladmin ping -h 127.0.0.1 --port=3306 --silent; do echo "Waiting for MySQL..."; sleep 5; done
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
@@ -47,8 +65,8 @@ jobs:
       - name: Generate application key
         run: php artisan key:generate
 
-      - name: Migrate
-        run: php artisan migrate:fresh
+      - name: Run migrations
+        run: php artisan migrate:fresh --seed
 
       - name: Run tests
         run: php artisan test
