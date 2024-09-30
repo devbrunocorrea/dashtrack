@@ -39,30 +39,6 @@ class TinyERPServiceTest extends TestCase
     /**
      * @depends test_instance
      */
-    public function test_xml_to_json(TinyERPService $service)
-    {
-        $stringXMLToArray = new \ReflectionMethod(TinyERPService::class, 'stringXMLToArray');
-        $stringXMLToArray->setAccessible(true);
-
-        $expected = ['foo' => 'bar'];
-        $xml = '<xml><foo>bar</foo></xml>';
-
-        $this->assertSame($expected, $stringXMLToArray->invoke($service, $xml));
-
-        $expected = [];
-        $xml = '';
-        $this->assertSame($expected, $stringXMLToArray->invoke($service, $xml));
-
-        $xml = null;
-        $this->assertSame($expected, $stringXMLToArray->invoke($service, $xml));
-        
-        $xml = false;
-        $this->assertSame($expected, $stringXMLToArray->invoke($service, $xml));
-    }
-
-    /**
-     * @depends test_instance
-     */
     public function test_generate_url(TinyERPService $service)
     {
         $generateURL = new \ReflectionMethod(TinyERPService::class, 'generateURL');
@@ -95,31 +71,32 @@ class TinyERPServiceTest extends TestCase
      */
     public function test_request_get(TinyERPService $service)
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>
-        <retorno>
-            <status_processamento>3</status_processamento>
-            <status>OK</status>
-            <pagina>1</pagina>
-            <numero_paginas>1566</numero_paginas>
-                <pedidos>
-                    <pedido>
-                        <id>919293603</id>
-                        <numero>153120</numero>
-                        <numero_ecommerce>Lojas Americanas-423600324</numero_ecommerce>
-                        <data_pedido>11/08/2022</data_pedido>
-                        <data_prevista>16/08/2022</data_prevista>
-                        <nome>Fulano da Silva</nome><valor>126.56</valor>
-                        <id_vendedor>0</id_vendedor>
-                        <nome_vendedor></nome_vendedor>
-                        <situacao>Cancelado</situacao>
-                        <codigo_rastreamento></codigo_rastreamento>
-                        <url_rastreamento></url_rastreamento>
-                    </pedido>
-                </pedidos>
-        </retorno>';
-        $xml = preg_replace('/>\s+</', '><', $xml);
+        $json = '{
+            "retorno": {
+                "status_processamento": 3,
+                "status": "OK",
+                "pagina": 1,
+                "numero_paginas": 1566,
+                "pedidos": {
+                    "pedido": {
+                        "id": 919293603,
+                        "numero": 153120,
+                        "numero_ecommerce": "Lojas Americanas-423600324",
+                        "data_pedido": "11/08/2022",
+                        "data_prevista": "16/08/2022",
+                        "nome": "Fulano da Silva",
+                        "valor": 126.56,
+                        "id_vendedor": 0,
+                        "nome_vendedor": "",
+                        "situacao": "Cancelado",
+                        "codigo_rastreamento": "",
+                        "url_rastreamento": ""
+                    }
+                }
+            }
+        }';
 
-        $mockResponse = new Response(200, [], $xml);
+        $mockResponse = new Response(200, [], $json);
         Http::shouldReceive('get')
             ->once()
             ->andReturn($mockResponse);
@@ -131,7 +108,7 @@ class TinyERPServiceTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertEquals($xml, $response->getBody());
+        $this->assertEquals($json, $response->getBody());
 
         return $service;
     }
@@ -141,31 +118,32 @@ class TinyERPServiceTest extends TestCase
      */
     public function test_get(TinyERPService $service)
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>
-        <retorno>
-            <status_processamento>3</status_processamento>
-            <status>OK</status>
-            <pagina>1</pagina>
-            <numero_paginas>1566</numero_paginas>
-                <pedidos>
-                    <pedido>
-                        <id>919293603</id>
-                        <numero>153120</numero>
-                        <numero_ecommerce>Lojas Americanas-423600324</numero_ecommerce>
-                        <data_pedido>11/08/2022</data_pedido>
-                        <data_prevista>16/08/2022</data_prevista>
-                        <nome>Fulano da Silva</nome><valor>126.56</valor>
-                        <id_vendedor>0</id_vendedor>
-                        <nome_vendedor></nome_vendedor>
-                        <situacao>Cancelado</situacao>
-                        <codigo_rastreamento></codigo_rastreamento>
-                        <url_rastreamento></url_rastreamento>
-                    </pedido>
-                </pedidos>
-        </retorno>';
-        $xml = preg_replace('/>\s+</', '><', $xml);
+        $json = '{
+            "retorno": {
+                "status_processamento": 3,
+                "status": "OK",
+                "pagina": 1,
+                "numero_paginas": 1566,
+                "pedidos": {
+                    "pedido": {
+                        "id": "919293603",
+                        "numero": "153120",
+                        "numero_ecommerce": "Lojas Americanas-423600324",
+                        "data_pedido": "11/08/2022",
+                        "data_prevista": "16/08/2022",
+                        "nome": "Fulano da Silva",
+                        "valor": 126.56,
+                        "id_vendedor": 0,
+                        "nome_vendedor": "",
+                        "situacao": "Cancelado",
+                        "codigo_rastreamento": "",
+                        "url_rastreamento": ""
+                    }
+                }
+            }
+        }';
 
-        $mockResponse = new Response(200, [], $xml);
+        $mockResponse = new Response(200, [], $json);
         Http::shouldReceive('get')
             ->once()
             ->andReturn($mockResponse);
@@ -175,10 +153,10 @@ class TinyERPServiceTest extends TestCase
         $orders = $get->invoke($service, 'pedidos');
 
         $expected = [
-            "status_processamento" => "3",
+            "status_processamento" => 3,
             "status" => "OK",
-            "pagina" => "1",
-            "numero_paginas" => "1566",
+            "pagina" => 1,
+            "numero_paginas" => 1566,
             "pedidos" => [
                 "pedido" =>
                 [
@@ -188,12 +166,12 @@ class TinyERPServiceTest extends TestCase
                     "data_pedido" => "11/08/2022",
                     "data_prevista" => "16/08/2022",
                     "nome" => "Fulano da Silva",
-                    "valor" => "126.56",
-                    "id_vendedor" => "0",
-                    "nome_vendedor" => [],
+                    "valor" => 126.56,
+                    "id_vendedor" => 0,
+                    "nome_vendedor" => '',
                     "situacao" => "Cancelado",
-                    "codigo_rastreamento" => [],
-                    "url_rastreamento" => [],
+                    "codigo_rastreamento" => '',
+                    "url_rastreamento" => '',
                 ],
             ],
         ];
