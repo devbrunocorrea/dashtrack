@@ -2,7 +2,8 @@
 
 [![Laravel Tests](https://github.com/devbrunocorrea/dashtrack/actions/workflows/laravel-tests.yaml/badge.svg?branch=main)](https://github.com/devbrunocorrea/dashtrack/actions/workflows/laravel-tests.yaml)
 
-O sistema permite a visualização de indicadores com dados do TinyERP.
+O sistema permite a visualização de indicadores com dados importados do TinyERP.
+<img src="resources/docs/app.png" />
 
 ## Tecnologias:
 - [x] PHP
@@ -14,6 +15,10 @@ O sistema permite a visualização de indicadores com dados do TinyERP.
 - [x] Docker (sem Laravel/Sail)
 - [x] PHPMyAdmin 
 - [x] Nginx
+
+## Requisitos:
+- [x] docker
+- [x] docker-compose
 
 ## Configuração:
 ```
@@ -49,11 +54,14 @@ http://127.0.0.1:8080/api
 
 ## Documentação da API - OpenAPI (Swagger)
 http://127.0.0.1:8080/api/documentation
+<img src="resources/docs/docs_api.png"/>
 
 ## PHPMyAdmin:
 http://127.0.0.1:8081
 * Login: `root`
 * Senha: `root`
+
+<img src="resources/docs/docs_phpmyadmin.png"/>
 
 ### Principais rotas:
 - /api
