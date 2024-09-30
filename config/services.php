@@ -31,8 +31,8 @@ return [
     ],
 
     'tinyerp' => [
-        'endpoint' => env('TINYERP_ENDPOINT'),
-        'token' => env('TINYERP_TOKEN'),
+        'endpoint' => env('TINYERP_ENDPOINT','https://api.tiny.com.br/api2'),
+        'token' => env('TINYERP_TOKEN',''),
     ]
 
 ];

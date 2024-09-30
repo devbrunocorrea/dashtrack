@@ -20,16 +20,15 @@ Micro-SaaS para Visualização de Indicadores de Negócios com Integração ao T
 - [x] docker
 - [x] docker-compose
 
-## Configuração:
-É necessário inserir o token de autenticação na variável de ambiente `TINYERP_TOKEN`:
-```
-TINYERP_ENDPOINT=https://api.tiny.com.br/api2
-TINYERP_TOKEN=TOKEN
-```
-
-## Execução Inicial:
+## Instalação:
+Execute o comando:
 ```
 ./setup
+```
+
+*** Será solicitado o preenchimento do token autenticação da TinyERP na variável de ambiente `TINYERP_TOKEN` no arquivo `.env`:
+```
+TINYERP_TOKEN=TOKEN
 ```
 
 ## Parar execução:

@@ -1,6 +1,12 @@
+clear
 docker-compose up -dV --build
 clear
 docker-compose exec php composer install
+clear
+cp .env.example .env
+echo "\n\n\n [ATENCAO]\n\n\n\n\n PREENCHA O TOKEN DA TINYERP NO ARQUIVO .ENV (continuando em 60 segundos)\n\n"
+echo $PWD"/.env"
+sleep 60
 clear
 echo Aguardando base de dados ser estabelecida...
 sleep 10 && docker-compose exec php php artisan migrate:fresh
